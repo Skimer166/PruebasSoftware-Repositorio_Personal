@@ -57,10 +57,6 @@ repos:
         files: \.[jt]sx?$
         types: [file]
         additional_dependencies:
-          - eslint@8.56.0
-          - eslint-config-standard
-          - eslint-plugin-import
-          - eslint-plugin-n
-          - eslint-plugin-promise
+          - eslint@9.21.0
           - "@eslint/js"
           - globals
