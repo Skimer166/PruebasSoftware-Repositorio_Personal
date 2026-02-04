@@ -49,3 +49,16 @@ repos:
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: "v8.56.0"
+    hooks:
+      - id: eslint
+        files: \.[jt]sx?$ # Target para archivos .js, .jsx, .ts, .tsx
+        types: [file]
+        additional_dependencies:
+          - eslint
+          - eslint-config-standard
+          - eslint-plugin-import
+          - eslint-plugin-n
+          - eslint-plugin-promise
