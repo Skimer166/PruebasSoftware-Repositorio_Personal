@@ -51,12 +51,16 @@ repos:
       - id: check-github-workflows
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v9.0.0-alpha.2"
+    rev: "v8.56.0"
     hooks:
       - id: eslint
         files: \.[jt]sx?$
         types: [file]
         additional_dependencies:
-          - eslint
+          - eslint@8.56.0
+          - eslint-config-standard
+          - eslint-plugin-import
+          - eslint-plugin-n
+          - eslint-plugin-promise
           - "@eslint/js"
           - globals
