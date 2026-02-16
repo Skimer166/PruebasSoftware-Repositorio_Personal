@@ -49,12 +49,3 @@ repos:
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
-
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.0.0
-    hooks:
-      - id: eslint
-        additional_dependencies:
-          - eslint@9.0.0
-          - "@eslint/js@9.0.0"
-          - globals@15.0.0
