@@ -57,4 +57,4 @@ repos:
         additional_dependencies:
           - eslint@9.0.0
           - "@eslint/js@9.0.0"
-          - globals
+          - globals@15.0.0
