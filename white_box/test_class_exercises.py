@@ -268,31 +268,31 @@ class TestWhiteBox(unittest.TestCase):
         self.assertEqual(verify_age(66), "Not Eligible")
 
     # 8
-    def test_categorize_product_A(self):
+    def test_categorize_product_a(self):
         """
         Checks Category A (10-50).
         """
         self.assertEqual(categorize_product(30), "Category A")
 
-    def test_categorize_product_B(self):
+    def test_categorize_product_b(self):
         """
         Checks Category B (51-100).
         """
         self.assertEqual(categorize_product(75), "Category B")
 
-    def test_categorize_product_C(self):
+    def test_categorize_product_c(self):
         """
         Checks Category C (101-200).
         """
         self.assertEqual(categorize_product(150), "Category C")
 
-    def test_categorize_product_D_high(self):
+    def test_categorize_product_d_high(self):
         """
         Checks Category D (over 200).
         """
         self.assertEqual(categorize_product(250), "Category D")
 
-    def test_categorize_product_D_low(self):
+    def test_categorize_product_d_low(self):
         """
         Checks Category D (under 10).
         """
