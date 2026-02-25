@@ -184,7 +184,7 @@ class TestWhiteBox(unittest.TestCase):
         ]
         self.assertAlmostEqual(calculate_order_total(cart_items), 324.0)
 
-#5
+    #5
     def test_calculate_items_shipping_cost_standard_low(self):
         """
         Checks standard shipping cost for total weight <= 5.
@@ -235,7 +235,7 @@ class TestWhiteBox(unittest.TestCase):
         with self.assertRaises(ValueError):
             calculate_items_shipping_cost(items, "drone")
 
-#6
+    #6
     def test_validate_login_success(self):
         """
         Checks successful login with valid lengths.
@@ -253,7 +253,7 @@ class TestWhiteBox(unittest.TestCase):
         Checks login failure due to short password.
         """
         self.assertEqual(validate_login("user123", "pass"), "Login Failed")
-#7
+    #7  
     def test_verify_age_eligible(self):
         """
         Checks age eligibility within range (18-65).
@@ -272,7 +272,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(verify_age(66), "Not Eligible")
 
-#8
+    #8
     def test_categorize_product_A(self):
         """
         Checks Category A (10-50).
@@ -303,7 +303,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(categorize_product(5), "Category D")
 
-#9
+    #9
     def test_validate_email_valid(self):
         """
         Checks a valid email format.
@@ -328,7 +328,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(validate_email("a@.c"), "Invalid Email")
 
-#10
+    #10
     def test_celsius_to_fahrenheit_valid(self):
         """
         Checks a valid conversion within bounds.
@@ -348,7 +348,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(celsius_to_fahrenheit(-101), "Invalid Temperature")
 
-#11
+    #11
     def test_validate_credit_card_valid(self):
         """
         Checks a valid card number.
@@ -367,7 +367,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(validate_credit_card("12345678901234a"), "Invalid Card")
 
-#12
+    #12
     def test_validate_date_valid(self):
         """
         Checks a valid date.
@@ -392,7 +392,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(validate_date(2023, 10, 32), "Invalid Date")
 
-#13
+    #13
     def test_check_flight_eligibility_by_age(self):
         """
         Checks eligibility based on valid age.
@@ -411,7 +411,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(check_flight_eligibility(15, False), "Not Eligible to Book")
 
-#14
+    #14
     def test_validate_url_valid_http(self):
         """
         Checks a valid http URL.
@@ -437,7 +437,7 @@ class TestWhiteBox(unittest.TestCase):
         long_url = "http://" + "a" * 250
         self.assertEqual(validate_url(long_url), "Invalid URL")
 
-#15
+    #15
     def test_calculate_quantity_discount_none(self):
         """
         Checks no discount for 1-5 items.
@@ -456,7 +456,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(calculate_quantity_discount(15), "10% Discount")
 
-#16
+    #16
     def test_check_file_size_valid(self):
         """
         Checks valid file size.
@@ -475,7 +475,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(check_file_size(-10), "Invalid File Size")
 
-#17
+    #17
     def test_check_loan_eligibility_not_eligible(self):
         """
         Checks ineligibility due to low income.
@@ -506,7 +506,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(check_loan_eligibility(80000, 700), "Standard Loan")
     
-#18
+    #18
     def test_calculate_shipping_cost_tier1(self):
         """
         Checks $5 shipping cost (weight<=1, dims<=10).
@@ -525,7 +525,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(calculate_shipping_cost(10, 50, 50, 50), 20)
 
-#19
+    #19
     def test_grade_quiz_pass(self):
         """
         Checks Pass condition (>=7 correct, <=2 incorrect).
@@ -544,7 +544,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(grade_quiz(4, 5), "Fail")
 
-#20
+    #20
     def test_authenticate_user_admin(self):
         """
         Checks Admin authentication.
@@ -563,7 +563,7 @@ class TestWhiteBox(unittest.TestCase):
         """
         self.assertEqual(authenticate_user("usr", "pass"), "Invalid")
 
-#21
+    #21
     def test_get_weather_advisory_hot(self):
         """
         Checks high temp/humidity advisory.
