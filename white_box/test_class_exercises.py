@@ -579,4 +579,3 @@ class TestWhiteBox(unittest.TestCase):
         Checks no specific advisory for normal weather.
         """
         self.assertEqual(get_weather_advisory(20, 40), "No Specific Advisory")
-        
