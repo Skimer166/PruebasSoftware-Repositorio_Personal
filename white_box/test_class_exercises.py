@@ -5,8 +5,33 @@ White-box unit testing examples.
 """
 import unittest
 
-from white_box.class_exercises import divide, get_grade, is_even, is_triangle, check_number_status, validate_password, calculate_total_discount, calculate_order_total, calculate_items_shipping_cost, validate_login, verify_age, categorize_product, validate_email, celsius_to_fahrenheit, validate_credit_card, validate_date, check_flight_eligibility, validate_url, calculate_quantity_discount, check_file_size, check_loan_eligibility, calculate_shipping_cost, grade_quiz, authenticate_user, get_weather_advisory
-
+from white_box.class_exercises import (
+    authenticate_user,
+    calculate_items_shipping_cost,
+    calculate_order_total,
+    calculate_quantity_discount,
+    calculate_shipping_cost,
+    calculate_total_discount,
+    categorize_product,
+    celsius_to_fahrenheit,
+    check_file_size,
+    check_flight_eligibility,
+    check_loan_eligibility,
+    check_number_status,
+    divide,
+    get_grade,
+    get_weather_advisory,
+    grade_quiz,
+    is_even,
+    is_triangle,
+    validate_credit_card,
+    validate_date,
+    validate_email,
+    validate_login,
+    validate_password,
+    validate_url,
+    verify_age,
+)
 
 class TestWhiteBox(unittest.TestCase):
     """
