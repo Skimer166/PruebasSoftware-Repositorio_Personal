@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-visor
 
 """
 White-box unit testing examples.
@@ -32,6 +32,7 @@ from white_box.class_exercises import (
     validate_url,
     verify_age,
 )
+
 
 class TestWhiteBox(unittest.TestCase):
     """
