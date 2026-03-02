@@ -6,6 +6,11 @@ White-box unit testing examples.
 import unittest
 
 from white_box.class_exercises import (
+    VendingMachine,
+    TrafficLight,
+    UserAuthentication,
+    DocumentEditingSystem,
+    ElevatorSystem,
     authenticate_user,
     calculate_items_shipping_cost,
     calculate_order_total,
@@ -31,11 +36,6 @@ from white_box.class_exercises import (
     validate_password,
     validate_url,
     verify_age,
-    VendingMachine,
-    TrafficLight,
-    UserAuthentication,
-    DocumentEditingSystem,
-    ElevatorSystem,
 )
 
 
@@ -632,7 +632,7 @@ class TestWhiteBoxVendingMachine(unittest.TestCase):
         Checks that the insert coin function throw an error when the state its not Ready and insert a coin
         """
         self.vending_machine.state = "Dispensing"
-        output =self.vending_machine.insert_coin()
+        output = self.vending_machine.insert_coin()
         
         self.assertEqual(self.vending_machine.state, "Dispensing")
         self.assertEqual(output, "Invalid operation in current state.")
@@ -641,14 +641,14 @@ class TestWhiteBoxVendingMachine(unittest.TestCase):
         """
         Checks that a drink is successfully dispensed when the machine is in the Dispensing state.
         """
-        self.vending_machine.state= "Dispensing"
+        self.vending_machine.state = "Dispensing"
         output = self.vending_machine.select_drink()
         
-        self.assertEqual(self.vending_machine.state,"Ready")
+        self.assertEqual(self.vending_machine.state, "Ready")
         self.assertEqual(output, "Drink Dispensed. Thank you!")
     
     def test_vending_machine_select_drink_invalid(self):
-        """"
+        """
         Checks that selecting a drink returns an error when the machine is in the Ready state.
         """
         output = self.vending_machine.select_drink()
