@@ -956,7 +956,7 @@ class TestBankingSystemAdvanced(unittest.TestCase):
         mock_print.assert_called_with("Insufficient funds.")
 
     @patch("builtins.print")
-    def test_transfer_exact_funds(self):
+    def test_transfer_exact_funds(self, _mock_print):
         """Caso: El monto + comisión es exactamente el saldo disponible (1000)."""
         self.system.authenticate(self.user, self.password)
         result = self.system.transfer_money(self.user, "receiver", 500, "regular")
