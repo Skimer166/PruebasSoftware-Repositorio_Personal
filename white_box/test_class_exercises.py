@@ -1,13 +1,18 @@
+# pylint: disable=too-many-lines
 # -*- coding: utf-8 -*-visor
 
 """
 White-box unit testing examples.
 """
 import unittest
+from unittest.mock import call, patch
 
 from white_box.class_exercises import (
+    BankingSystem,
     DocumentEditingSystem,
     ElevatorSystem,
+    Product,
+    ShoppingCart,
     TrafficLight,
     UserAuthentication,
     VendingMachine,
@@ -875,3 +880,157 @@ class TestWhiteBoxElevatorSystem(unittest.TestCase):
 
         self.assertEqual(self.elevator.state, "Idle")
         self.assertEqual(output, "Invalid operation in current state")
+
+
+class TestBankingSystemAdvanced(unittest.TestCase):
+    """
+    Test for the Bank System
+    """
+
+    def setUp(self):
+        """Configuración inicial para cada prueba."""
+        self.system = BankingSystem()
+        self.user = "user123"
+        self.password = "pass123"
+
+    # Pruebas Autenticacion
+
+    @patch("builtins.print")
+    def test_auth_user_does_not_exist(self, mock_print):
+        """Caso: El usuario no está en el diccionario 'users'."""
+        result = self.system.authenticate("usuario_fantasma", "123")
+        self.assertFalse(result)
+        mock_print.assert_called_with("Authentication failed.")
+
+    @patch("builtins.print")
+    def test_auth_already_logged_in(self, mock_print):
+        """Caso: Un usuario intenta loguearse dos veces."""
+        self.system.authenticate(self.user, self.password)
+        result = self.system.authenticate(self.user, self.password)
+
+        self.assertFalse(result)
+        mock_print.assert_called_with("User already logged in.")
+
+    # Pruebas Transferencia
+
+    @patch("builtins.print")
+    def test_transfer_invalid_type(self, mock_print):
+        """Caso: Se ingresa un tipo de transacción que no existe (ej. 'crypto')."""
+        self.system.authenticate(self.user, self.password)
+        result = self.system.transfer_money(self.user, "receiver", 100, "crypto")
+
+        self.assertFalse(result)
+        mock_print.assert_called_with("Invalid transaction type.")
+
+    @patch("builtins.print")
+    def test_transfer_express_success(self, mock_print):
+        """Caso: Transferencia 'express' con comisión del 5%."""
+        self.system.authenticate(self.user, self.password)
+        result = self.system.transfer_money(self.user, "receiver", 100, "express")
+
+        self.assertTrue(result)
+        mock_print.assert_called_with(
+            "Money transfer of $100 (express transfer) from user123 "
+            "to receiver processed successfully."
+        )
+
+    @patch("builtins.print")
+    def test_transfer_scheduled_success(self, mock_print):
+        """Caso: Transferencia 'scheduled' con comisión del 1%."""
+        self.system.authenticate(self.user, self.password)
+        result = self.system.transfer_money(self.user, "receiver", 200, "scheduled")
+
+        self.assertTrue(result)
+        mock_print.assert_called_with(
+            "Money transfer of $200 (scheduled transfer) from user123 "
+            "to receiver processed successfully."
+        )
+
+    @patch("builtins.print")
+    def test_transfer_boundary_insufficient_funds(self, mock_print):
+        """Caso: Saldo justo por debajo de lo necesario (Borde)."""
+        self.system.authenticate(self.user, self.password)
+        result = self.system.transfer_money(self.user, "receiver", 981, "regular")
+
+        self.assertFalse(result)
+        mock_print.assert_called_with("Insufficient funds.")
+
+    @patch("builtins.print")
+    def test_transfer_exact_funds(self, _mock_print):
+        """Caso: El monto + comisión es exactamente el saldo disponible (1000)."""
+        self.system.authenticate(self.user, self.password)
+        result = self.system.transfer_money(self.user, "receiver", 500, "regular")
+        self.assertTrue(result)
+
+
+class TestShoppingSystem(unittest.TestCase):
+    """Test Shopping System Class"""
+
+    def setUp(self):
+        """Preparamos productos y un carrito antes de cada prueba."""
+        self.p1 = Product("Laptop", 1000)
+        self.p2 = Product("Mouse", 50)
+        self.cart = ShoppingCart()
+
+    # Pruebas Producto
+
+    @patch("builtins.print")
+    def test_view_product(self, mock_print):
+        """Verifica que el mensaje del producto sea correcto y se imprima."""
+        res = self.p1.view_product()
+        expected = "The product Laptop has a price of 1000"
+
+        self.assertEqual(res, expected)
+        mock_print.assert_called_with(expected)
+
+    # Pruebas Carrito
+
+    def test_add_product_new(self):
+        """Verifica que un producto nuevo se agregue al carrito."""
+        self.cart.add_product(self.p1, 2)
+        self.assertEqual(len(self.cart.items), 1)
+        self.assertEqual(self.cart.items[0]["quantity"], 2)
+
+    def test_add_product_existing(self):
+        """Verifica que si el producto ya existe, se sume la cantidad."""
+        self.cart.add_product(self.p1, 1)
+        self.cart.add_product(self.p1, 3)
+
+        self.assertEqual(len(self.cart.items), 1)
+        self.assertEqual(self.cart.items[0]["quantity"], 4)
+
+    def test_remove_product_partial(self):
+        """Verifica que se reste cantidad sin eliminar el producto."""
+        self.cart.add_product(self.p1, 5)
+        self.cart.remove_product(self.p1, 2)
+
+        self.assertEqual(self.cart.items[0]["quantity"], 3)
+
+    def test_remove_product_total(self):
+        """Verifica que el producto desaparezca si quitamos toda la cantidad."""
+        self.cart.add_product(self.p1, 2)
+        self.cart.remove_product(self.p1, 2)
+
+        self.assertEqual(len(self.cart.items), 0)
+
+    @patch("builtins.print")
+    def test_view_cart(self, mock_print):
+        """Verifica que el carrito liste todos los productos y sus subtotales."""
+        self.cart.add_product(self.p1, 1)
+        self.cart.add_product(self.p2, 2)
+
+        self.cart.view_cart()
+
+        expected_calls = [call("1 x Laptop - $1000"), call("2 x Mouse - $100")]
+        mock_print.assert_has_calls(expected_calls)
+
+    @patch("builtins.print")
+    def test_checkout(self, mock_print):
+        """Verifica el cálculo del total y el mensaje de agradecimiento."""
+        self.cart.add_product(self.p1, 1)
+        self.cart.add_product(self.p2, 1)
+
+        self.cart.checkout()
+
+        mock_print.assert_any_call("Total: $1050")
+        mock_print.assert_any_call("Checkout completed. Thank you for shopping!")
