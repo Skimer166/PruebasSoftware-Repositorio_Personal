@@ -7,7 +7,7 @@ from unittest.mock import mock_open, patch
 
 from white_box.mockup_exercises import (
     execute_command,
-    fetch_data_from_api, 
+    fetch_data_from_api,
     perform_action_based_on_time,
     read_data_from_file,
 )
