@@ -1,6 +1,7 @@
 """
 Mock up testing examples.
 """
+
 import subprocess
 import unittest
 from unittest.mock import mock_open, patch
