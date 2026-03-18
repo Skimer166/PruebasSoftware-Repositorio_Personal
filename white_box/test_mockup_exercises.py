@@ -3,13 +3,13 @@ Mock up testing examples.
 """
 import subprocess
 import unittest
-from unittest.mock import patch, mock_open
+from unittest.mock import mock_open, patch
 
 from white_box.mockup_exercises import (
+    execute_command,
     fetch_data_from_api, 
     perform_action_based_on_time,
     read_data_from_file,
-    execute_command
 )
 
 
@@ -109,7 +109,9 @@ class TestExecuteCommand(unittest.TestCase):
 
         self.assertEqual(result, "Command executed successfully\n")
         
-        mock_run.assert_called_once_with(command, capture_output=True, check=False, text=True)
+        mock_run.assert_called_once_with(
+            command, capture_output=True, check=False, text=True
+        )
 
     @patch("white_box.mockup_exercises.subprocess.run")
     def test_execute_command_called_process_error(self, mock_run):
