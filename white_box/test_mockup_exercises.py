@@ -72,11 +72,11 @@ class TestReadDataFromFile(unittest.TestCase):
         Success case for reading a file
         """
         filename = "test.txt"
-        
+
         result = read_data_from_file(filename)
 
         self.assertEqual(result, "mocked file content")
-        
+
         mock_file.assert_called_once_with(filename, encoding="utf-8")
 
     @patch("builtins.open")
@@ -85,9 +85,9 @@ class TestReadDataFromFile(unittest.TestCase):
         FileNotFoundError exception case
         """
         mock_file.side_effect = FileNotFoundError("File not found")
-        
+
         filename = "missing.txt"
-        
+
         with self.assertRaises(FileNotFoundError):
             read_data_from_file(filename)
 
@@ -103,13 +103,13 @@ class TestExecuteCommand(unittest.TestCase):
         Success case for executing a command
         """
         mock_run.return_value.stdout = "Command executed successfully\n"
-        
+
         command = ["echo", "hello"]
-        
+
         result = execute_command(command)
 
         self.assertEqual(result, "Command executed successfully\n")
-        
+
         mock_run.assert_called_once_with(
             command, capture_output=True, check=False, text=True
         )
@@ -120,8 +120,8 @@ class TestExecuteCommand(unittest.TestCase):
         Exception case
         """
         command = ["ls", "-invalid"]
-        
+
         mock_run.side_effect = subprocess.CalledProcessError(returncode=1, cmd=command)
-        
+
         with self.assertRaises(subprocess.CalledProcessError):
             execute_command(command)
