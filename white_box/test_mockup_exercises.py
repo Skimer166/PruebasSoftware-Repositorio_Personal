@@ -114,7 +114,7 @@ class TestExecuteCommand(unittest.TestCase):
     @patch("white_box.mockup_exercises.subprocess.run")
     def test_execute_command_called_process_error(self, mock_run):
         """
-        CalledProcessError exception case
+        Exception case
         """
         command = ["ls", "-invalid"]
         
