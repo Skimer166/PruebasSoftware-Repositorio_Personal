@@ -36,3 +36,9 @@ repos:
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
+
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.0.3
+    hooks:
+      - id: pylint
+        additional_dependencies: [requests]
