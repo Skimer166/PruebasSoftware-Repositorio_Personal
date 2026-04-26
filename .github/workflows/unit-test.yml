@@ -7,13 +7,16 @@ jobs:
   unit-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code # ← FALTABA: descarga tu repositorio
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python # ← FALTABA: configura Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Install dependencies # ← AGREGA ESTO
+        run: pip install requests
 
       - name: Run Unit Tests
         run: |
