@@ -14,6 +14,3 @@ jobs:
         with:
           node-version: "20"
       - uses: pre-commit/action@v3.0.0
-      - name: Run Unit Tests
-        run: |
-          python -m unittest discover -s white_box -p 'test_*.py'

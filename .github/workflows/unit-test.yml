@@ -1,0 +1,12 @@
+name: Unit-Tests
+
+on:
+  pull_request:
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Unit Tests
+        run: |
+          python -m unittest discover -s white_box -p 'test_*.py'
